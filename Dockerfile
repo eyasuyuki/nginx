@@ -14,6 +14,7 @@ RUN \
   apt-get install -y nginx && \
   rm -rf /var/lib/apt/lists/* && \
   echo "\ndaemon off;" >> /etc/nginx/nginx.conf && \
+  sed -i.bak 's/try_files $uri $uri\/ =404;/fastcgi_pass	fcgihost:9001;\n	    include		fastcgi_params;/' /etc/nginx/sites-available/default && \
   chown -R www-data:www-data /var/lib/nginx
 
 # Define mountable directories.
